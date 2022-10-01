@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content white-text">
+          <div class="row">
+            <div class="col s5">
+              <form #todoForm="ngForm" (ngSubmit)="onSubmit(todoForm)">
+                <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="todoService.selectedTodo._id">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="text" name="topic" #name="ngModel" [(ngModel)]="todoService.selectedTodo.topic" placeholder="Enter topicl name" required>
+                    <label>Topic :
+                      <label class="red-text">*</label>
+                    </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="text" name="description" #name="ngModel" [(ngModel)]="todoService.selectedTodo.description" placeholder="description">
+                    <label>Description :</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <button class="btn btn-custom right" type="button" (click)="resetForm(todoForm)">Reset</button>
+                    <button class="btn btn-custom right" type="submit" [disabled]="!todoForm.valid">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col s7">
+                <table class="responsive-table highlight">
+                    <thead>
+                      <tr>
+                        <th>Topic</th>
+                        <th>Description</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tr *ngFor="let todo of todoService.todos">
+                      <td>{{todo.topic}}</td>
+                      <td>{{todo.description}}</td>
+                      <td>
+                          <a class="action-btn" (click)="onEdit(todo)">
+                            <i class="material-icons">edit</i>
+                          </a>
+                          <a class="action-btn" (click)="onDelete(todo._id,todoForm)">
+                            <i class="material-icons">delete</i>
+                          </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
